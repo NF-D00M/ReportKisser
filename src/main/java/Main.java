@@ -11,8 +11,7 @@ public class Main {
 //            sg.GUI();
 
         HRV hrv = new HRV();
-        hrv.ImportFile();
-
+        hrv.getTurnover();
     }
 }
 
