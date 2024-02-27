@@ -11,7 +11,8 @@ public class Main {
 //            sg.GUI();
 
         HRV hrv = new HRV();
-        hrv.getTurnover();
+        hrv.setTurnover();
+
     }
 }
 
