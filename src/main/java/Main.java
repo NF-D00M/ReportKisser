@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Let's Kiss");
 
-//        SwingGUI sg = new SwingGUI();
-//            sg.GUI();
+        SwingGUI sg = new SwingGUI();
+        sg.GUI();
 
         HRV hrv = new HRV();
         hrv.setTurnover();
