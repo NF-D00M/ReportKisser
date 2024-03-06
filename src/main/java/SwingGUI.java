@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class SwingGUI {
 
+    String selected;
+
     public void GUI() {
         JFrame jfrm = new JFrame("ReportKisser");
         jfrm.setSize(500,500);
@@ -26,7 +28,7 @@ public class SwingGUI {
         JLabel jlbl = new JLabel("REPORT KISSER");
         jlbl.setFont(new Font("Lucida Console", Font.BOLD, 25));
         jlbl.setForeground(new Color(	88, 110, 117));
-        jlbl.setBounds(150,10,250,80);
+        jlbl.setBounds(152,10,250,80);
         return jlbl;
     }
 
@@ -42,15 +44,20 @@ public class SwingGUI {
         Arrays.sort(providers);
         final JComboBox<String> pDropDown = new JComboBox<>(providers);
         pDropDown.setBounds(155,110,200,25);
-        System.out.println(pDropDown.getSelectedItem());
+//        System.out.println(pDropDown.getSelectedItem());
         pDropDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selected = (String) pDropDown.getSelectedItem();
+                selected = (String) pDropDown.getSelectedItem();
                 System.out.println(selected);
             }
         });
         return pDropDown;
+    }
+
+    public String getSelected() {
+        System.out.println(selected);
+        return selected;
     }
 
 

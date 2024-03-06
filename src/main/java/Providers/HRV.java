@@ -1,22 +1,33 @@
 package Providers;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
 
-public class HRV {
-    private String Provider = "HRV";
+public class HRV implements Provider {
+    private String Provider;
     public double FONet;
     public double ToteNet;
 
+    public HRV(String provider) {
+        this.Provider = provider;
+    }
+
+    @Override
+    public String getProviderName() {
+        System.out.println(Provider);
+        return Provider;
+    }
+
+    @Override
     public Workbook readWorkbook() throws IOException {
         String fileLocation = "src/main/resources/ProviderFiles/HRV/HRV_Data_May.xlsx";
         Workbook workbook = new XSSFWorkbook(fileLocation);
         return workbook;
     }
 
+    @Override
     public void setTurnover() throws IOException {
         System.out.println("Retrieving Turnover for: " + Provider);
         readWorkbook();
@@ -44,6 +55,7 @@ public class HRV {
         return ToteNet;
     }
 
+    @Override
     public void writeWorkbook() throws IOException {
         System.out.println("Opening HRV Template");
         String fileLocation = "src/main/resources/ProviderFiles/HRV/HRV_Template.xlsx";
@@ -67,4 +79,6 @@ public class HRV {
             workbook.write(fileOut);
         };
     }
+
+
 }
