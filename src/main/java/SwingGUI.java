@@ -42,16 +42,16 @@ public class SwingGUI {
         jfrm.add(jSelect);
 
 //        Selected Provider
-        JTextArea jLabel = new JTextArea();
-        jLabel.setBounds(280,153,200,25);
-        jLabel.setForeground(new Color(	88, 110, 117));
+        JTextArea jtxt = new JTextArea();
+        jtxt.setBounds(280,153,200,25);
+        jtxt.setForeground(new Color(	88, 110, 117));
         pDropDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selected = (String) pDropDown.getSelectedItem();
                 System.out.println(selected);
-                jLabel.setText(selected);
-                jfrm.add(jLabel);
+                jtxt.setText(selected);
+                jfrm.add(jtxt);
             }
         });
 
