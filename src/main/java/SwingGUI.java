@@ -1,78 +1,71 @@
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 
 public class SwingGUI {
 
     String selected;
 
-    public void GUI() {
+    public JFrame RunGUI() {
         JFrame jfrm = new JFrame("ReportKisser");
         jfrm.setSize(500,500);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.getContentPane().setBackground(Color.white);
 
 //        Builder
-        jfrm.add(TitleLabel());
-        jfrm.add(ProviderLabel());
-        jfrm.add(ProviderDropDown());
-        jfrm.add(GenerateReport());
-        jfrm.setLayout(null);
-        jfrm.setVisible(true);
-    }
+        JLabel jtitle = new JLabel("REPORT KISSER");
+        jtitle.setFont(new Font("Lucida Console", Font.BOLD, 25));
+        jtitle.setForeground(new Color(	88, 110, 117));
+        jtitle.setBounds(152,10,250,80);
+        jfrm.add(jtitle);
 
-    public JLabel TitleLabel() {
-        JLabel jlbl = new JLabel("REPORT KISSER");
-        jlbl.setFont(new Font("Lucida Console", Font.BOLD, 25));
-        jlbl.setForeground(new Color(	88, 110, 117));
-        jlbl.setBounds(152,10,250,80);
-        return jlbl;
-    }
+        JLabel jprovider = new JLabel("Select Data Provider", JLabel.CENTER);
+        jprovider.setBounds(155,75,200,25);
+        jprovider.setForeground(new Color(	88, 110, 117));
+        jfrm.add(jprovider);
 
-    public JLabel ProviderLabel() {
-        JLabel jlbl = new JLabel("Select Data Provider", JLabel.CENTER);
-        jlbl.setBounds(155,75,200,25);
-        jlbl.setForeground(new Color(	88, 110, 117));
-        return jlbl;
-    }
-
-    public JComboBox<String> ProviderDropDown() {
-        String[] providers = {"HRV", "GRNSW", "GRV"};
+        String[] providers = {"-", "HRV", "GRNSW", "GRV"};
         Arrays.sort(providers);
-        final JComboBox<String> pDropDown = new JComboBox<>(providers);
-        pDropDown.setBounds(155,110,200,25);
-//        System.out.println(pDropDown.getSelectedItem());
+        JComboBox<String> pDropDown = new JComboBox<>(providers);
+        pDropDown.setBounds(155, 110, 200, 25);
+        jfrm.add(pDropDown);
+
+        JTextArea jLabel = new JTextArea();
+        jLabel.setBounds(280,153,200,25);
+        jLabel.setForeground(new Color(	88, 110, 117));
         pDropDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selected = (String) pDropDown.getSelectedItem();
+                String selected = (String) pDropDown.getSelectedItem();
                 System.out.println(selected);
+                jLabel.setText(selected);
+                jfrm.add(jLabel);
             }
         });
-        return pDropDown;
-    }
 
-    public String getSelected() {
-        System.out.println(selected);
-        return selected;
-    }
+        JLabel jSelect = new JLabel("Selected: ", JLabel.CENTER);
+        jSelect.setBounds(125,150,200,25);
+        jSelect.setForeground(new Color(	88, 110, 117));
+        jfrm.add(jSelect);
 
-
-
-    public JButton GenerateReport() {
         JButton jbtn = new JButton("Generate Report");
-        jbtn.setBounds(155,150,200,25);
-        return jbtn;
+        jbtn.setBounds(155,185,200,25);
+        jfrm.add(jbtn);
+
+        jfrm.setLayout(null);
+        jfrm.setVisible(true);
+        return jfrm;
     }
 
 
-    public void ListFonts() {
-        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for(String font : fonts){
-            System.out.println(font);
-        }
-    }
+
+
+
+
 }
