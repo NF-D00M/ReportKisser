@@ -1,5 +1,3 @@
-package Providers;
-
 public class ProviderFactory {
     public Provider getProvider(String providerType) {
         if (providerType == null) {

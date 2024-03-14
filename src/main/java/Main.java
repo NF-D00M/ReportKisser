@@ -1,7 +1,3 @@
-import Providers.HRV;
-import Providers.Provider;
-import Providers.ProviderFactory;
-
 import java.io.IOException;
 
 public class Main {
@@ -11,11 +7,16 @@ public class Main {
         System.out.println("Let's Kiss");
 
         SwingGUI sg = new SwingGUI();
+        ProviderChannel pc = new ProviderChannel();
+
+        sg.addObserver(pc);
+
         sg.RunGUI();
 
-
         ProviderFactory providerFactory = new ProviderFactory();
-        Provider provider = providerFactory.getProvider("HRV");
+        Provider provider = providerFactory.getProvider(sg.getProviderName());
+
+
 //        provider.getProviderName();
 //        provider.setTurnover();
 //        provider.writeWorkbook();

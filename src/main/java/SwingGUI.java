@@ -2,13 +2,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.OutputStream;
-import java.io.PrintStream;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SwingGUI {
+
+    private String SelectedProvider;
+
+    private ArrayList<Channel> channels = new ArrayList<>();
+
+    public void addObserver(Channel channel) {
+        this.channels.add(channel);
+    }
+
+    public void removeObserver(Channel chennel) {
+        this.channels.remove(chennel);
+    }
+
+    public void setProviderName(String providerName) {
+        this.SelectedProvider = providerName;
+        for (Channel channel : this.channels) {
+            channel.update(this.SelectedProvider);
+        }
+    }
+
+    public String getProviderName() {
+        System.out.println(this.SelectedProvider);
+        return this.SelectedProvider;
+    }
 
     public JFrame RunGUI() {
         JFrame jfrm = new JFrame("ReportKisser");
@@ -17,15 +39,15 @@ public class SwingGUI {
         jfrm.getContentPane().setBackground(Color.white);
 
 //        Program Title
-        JLabel jtitle = new JLabel("REPORT KISSER");
+        JLabel jtitle = new JLabel("REPORT KISSER", JLabel.CENTER);
         jtitle.setFont(new Font("Lucida Console", Font.BOLD, 25));
         jtitle.setForeground(new Color(	88, 110, 117));
-        jtitle.setBounds(152,10,250,80);
+        jtitle.setBounds(130,10,230,80);
         jfrm.add(jtitle);
 
 //        Select Provider Label
         JLabel jprovider = new JLabel("Select Data Provider", JLabel.CENTER);
-        jprovider.setBounds(155,75,200,25);
+        jprovider.setBounds(130,75,230,25);
         jprovider.setForeground(new Color(	88, 110, 117));
         jfrm.add(jprovider);
 
@@ -33,17 +55,17 @@ public class SwingGUI {
         String[] providers = {"-", "HRV", "GRNSW", "GRV"};
         Arrays.sort(providers);
         JComboBox<String> pDropDown = new JComboBox<>(providers);
-        pDropDown.setBounds(155, 110, 200, 25);
+        pDropDown.setBounds(130, 110, 230, 25);
         jfrm.add(pDropDown);
 
         JLabel jSelect = new JLabel("Selected: ", JLabel.CENTER);
-        jSelect.setBounds(125,150,200,25);
+        jSelect.setBounds(100,150,230,25);
         jSelect.setForeground(new Color(	88, 110, 117));
         jfrm.add(jSelect);
 
 //        Selected Provider
         JTextArea jtxt = new JTextArea();
-        jtxt.setBounds(280,153,200,25);
+        jtxt.setBounds(255,153,200,25);
         jtxt.setForeground(new Color(	88, 110, 117));
         pDropDown.addActionListener(new ActionListener() {
             @Override
@@ -57,8 +79,28 @@ public class SwingGUI {
 
 //        Generate Button
         JButton jbtn = new JButton("Generate Report");
-        jbtn.setBounds(155,185,200,25);
+        jbtn.setBounds(130,185,230,25);
         jfrm.add(jbtn);
+
+        JTextArea generateText = new JTextArea("Test");
+        generateText.setBounds(130,250,230,25);
+        generateText.setForeground(new Color(	88, 110, 117));
+        jfrm.add(generateText);
+
+        jbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = (String) pDropDown.getSelectedItem();
+                SelectedProvider = selected;
+                System.out.println(SelectedProvider);
+
+                generateText.setText("Generating Report for Provider: " + SelectedProvider);
+
+            }
+        });
+
+
+
 
 //        Frame Layout
         jfrm.setLayout(null);
