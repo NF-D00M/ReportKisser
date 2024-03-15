@@ -22,11 +22,8 @@ public class ProviderFactory implements Observer {
         }
         else if (providerName.equalsIgnoreCase("GRV")) {
 //            provider = new GRV("GRV");
-//
         }
-
     }
-
 
     public void processData() throws IOException {
         System.out.println("Processing Data");

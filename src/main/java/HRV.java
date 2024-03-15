@@ -9,7 +9,6 @@ public class HRV implements Provider {
     public double ToteNet;
 
     public HRV(String provider) {
-        System.out.println("check");
         this.provider = provider;
     }
 
