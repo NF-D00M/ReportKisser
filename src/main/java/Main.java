@@ -6,15 +6,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Let's Kiss");
 
-        SwingGUI sg = new SwingGUI();
-        ProviderChannel pc = new ProviderChannel();
+        SwingGUI swingGUI = new SwingGUI();
+        swingGUI.RunGUI();
 
-        sg.addObserver(pc);
+        Observer providerObserver = new ProviderFactory();
+        swingGUI.addObserver(providerObserver);
 
-        sg.RunGUI();
 
-        ProviderFactory providerFactory = new ProviderFactory();
-        Provider provider = providerFactory.getProvider(sg.getProviderName());
+//        Provider provider = providerFactory.getProvider(sg.getProviderName());
 
 
 //        provider.getProviderName();

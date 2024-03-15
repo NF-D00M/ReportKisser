@@ -4,18 +4,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 
 public class HRV implements Provider {
-    private String Provider;
+    private String provider;
     public double FONet;
     public double ToteNet;
 
     public HRV(String provider) {
-        this.Provider = provider;
+        System.out.println("check");
+        this.provider = provider;
     }
 
     @Override
     public String getProviderName() {
-        System.out.println(Provider);
-        return Provider;
+        System.out.println(this.provider);
+        return this.provider;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class HRV implements Provider {
 
     @Override
     public void setTurnover() throws IOException {
-        System.out.println("Retrieving Turnover for: " + Provider);
+        System.out.println("Retrieving Turnover for: " + provider);
         readWorkbook();
         Sheet sheet = readWorkbook().getSheetAt(0);
         for (Row row : sheet) {
